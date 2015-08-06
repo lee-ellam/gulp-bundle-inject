@@ -44,6 +44,7 @@ module.exports = function (bundles, options) {
         });
         
         if (!referencedScriptBundles.length && !referencedStyleBundles.length) {
+            console.log('exiting', file.name);
             return cb(null, file);
         }
 
@@ -54,8 +55,8 @@ module.exports = function (bundles, options) {
                     read: false
                 }), {
                     name: bundle
-                }));
-                fn();
+                })).on('end', function() { console.log('ended'); }).on('finish', function() { console.log('finished'); });
+                asnyc.nextTick(fn);
             }, function(err) {
                 if (err) cb(err);
             });
@@ -69,7 +70,7 @@ module.exports = function (bundles, options) {
                 }), {
                     name: bundle
                 }));
-                fn();
+                asnyc.nextTick(fn);
             }, function(err) {
                 if (err) cb(err);
             });
