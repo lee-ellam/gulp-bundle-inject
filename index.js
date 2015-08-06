@@ -6,7 +6,7 @@ var through2 = require('through2');
 var less = require('less');
 var path = require('path');
 
-module.exports = function (bundles, options) {
+var bundleInject = function (bundles, options) {
     options = options || {};
 
     // Add custom transform type
@@ -92,3 +92,6 @@ module.exports = function (bundles, options) {
         return cb(null, file);
     });
 };
+
+bundleInject.transform = inject.transform;
+module.exports = bundleInject;
