@@ -55,8 +55,10 @@ module.exports = function (bundles, options) {
                     read: false
                 }), {
                     name: bundle
-                })).on('end', function() { console.log('ended'); }).on('finish', function() { console.log('finished'); });
-                async.nextTick(fn);
+                })).on('end', function() {
+                    console.log('ended');
+                    async.nextTick(fn);
+                });
             }, function(err) {
                 if (err) cb(err);
             });
