@@ -4,7 +4,9 @@ var async = require('async');
 var gutil = require('gulp-util');
 var through2 = require('through2');
 
-module.exports = function (bundles) {
+module.exports = function (bundles, options) {
+    options = options || {};
+
     return through2.obj(function (file, enc, cb) {
         var stream = this;
         
@@ -47,7 +49,8 @@ module.exports = function (bundles) {
 
         if (referencedScriptBundles.length) {
             async.eachSeries(referencedScriptBundles, function (bundle, fn) {
-                stream.pipe(inject(gulp.src(bundles.scripts[bundle], {
+                var glob = options.debug ? bundles.scripts[bundle] : bundles.outputDir.scripts + bundles.scripts[bundle] + '.js';
+                stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
                     name: bundle
@@ -60,7 +63,8 @@ module.exports = function (bundles) {
         
         if (referencedStyleBundles.length) {
             async.eachSeries(referencedStyleBundles, function (bundle, fn) {
-                stream.pipe(inject(gulp.src(bundles.styles[bundle], {
+                var glob = options.debug ? bundles.styles[bundle] : bundles.outputDir.styles + bundles.styles[bundle] + '.css';
+                stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
                     name: bundle
