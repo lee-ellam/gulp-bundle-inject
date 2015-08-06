@@ -1,0 +1,27 @@
+{
+  "name": "gulp-bundle-inject",
+  "version": "1.0.0",
+  "description": "Pass a bundle object and use gulp-inject to inject multiple bundles",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec **/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lee-ellam/gulp-bundle-inject.git"
+  },
+  "author": "leesus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lee-ellam/gulp-bundle-inject/issues"
+  },
+  "homepage": "https://github.com/lee-ellam/gulp-bundle-inject",
+  "private": true,
+  "devDependencies": {
+    "async": "^1.4.0",
+    "gulp": "^3.9.0",
+    "gulp-inject": "^1.5.0",
+    "gulp-util": "^3.0.6",
+    "through2": "^2.0.0"
+  }
+}
