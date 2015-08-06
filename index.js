@@ -3,9 +3,14 @@ var inject = require('gulp-inject');
 var async = require('async');
 var gutil = require('gulp-util');
 var through2 = require('through2');
+var less = require('less');
+var path = require('path');
 
 module.exports = function (bundles, options) {
     options = options || {};
+
+    // Add custom transform type
+    inject.transform.html.less = inject.transform.html.css;
 
     return through2.obj(function (file, enc, cb) {
         var stream = this;
@@ -55,7 +60,8 @@ module.exports = function (bundles, options) {
                     read: false
                 }), {
                     name: bundle,
-                    quiet: true
+                    quiet: true,
+                    transform: options.transform || inject.transform
                 })).on('end', function() {
                     //console.log('ended');
                     async.nextTick(fn);
@@ -72,7 +78,8 @@ module.exports = function (bundles, options) {
                     read: false
                 }), {
                     name: bundle,
-                    quiet: true
+                    quiet: true,
+                    transform: options.transform || inject.transform
                 })).on('end', function() {
                     //console.log('ended');
                     async.nextTick(fn);
