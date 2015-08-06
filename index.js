@@ -44,7 +44,7 @@ module.exports = function (bundles, options) {
         });
         
         if (!referencedScriptBundles.length && !referencedStyleBundles.length) {
-            console.log('exiting', file.path);
+            //console.log('exiting', file.path);
             return cb(null, file);
         }
 
@@ -54,9 +54,10 @@ module.exports = function (bundles, options) {
                 stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
-                    name: bundle
+                    name: bundle,
+                    quiet: true
                 })).on('end', function() {
-                    console.log('ended');
+                    //console.log('ended');
                     async.nextTick(fn);
                 });
             }, function(err) {
@@ -70,9 +71,12 @@ module.exports = function (bundles, options) {
                 stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
-                    name: bundle
-                }));
-                async.nextTick(fn);
+                    name: bundle,
+                    quiet: true
+                })).on('end', function() {
+                    //console.log('ended');
+                    async.nextTick(fn);
+                });
             }, function(err) {
                 if (err) cb(err);
             });
