@@ -49,7 +49,7 @@ module.exports = function (bundles, options) {
 
         if (referencedScriptBundles.length) {
             async.eachSeries(referencedScriptBundles, function (bundle, fn) {
-                var glob = options.debug ? bundles.scripts[bundle] : bundles.outputDir.scripts + bundles.scripts[bundle] + '.js';
+                var glob = options.debug ? bundles.scripts[bundle] : bundles.outputDir.scripts + bundle + '.js';
                 stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
@@ -63,7 +63,7 @@ module.exports = function (bundles, options) {
         
         if (referencedStyleBundles.length) {
             async.eachSeries(referencedStyleBundles, function (bundle, fn) {
-                var glob = options.debug ? bundles.styles[bundle] : bundles.outputDir.styles + bundles.styles[bundle] + '.css';
+                var glob = options.debug ? bundles.styles[bundle] : bundles.outputDir.styles + bundle + '.css';
                 stream.pipe(inject(gulp.src(glob, {
                     read: false
                 }), {
