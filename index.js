@@ -11,7 +11,7 @@ var bundleInject = function (bundles, options) {
 
     // Add custom transform type
     inject.transform.html.less = inject.transform.html.css;
-
+    
     return through2.obj(function (file, enc, cb) {
         var stream = this;
         
@@ -41,7 +41,7 @@ var bundleInject = function (bundles, options) {
         });
 
         styleBundles.forEach(function (bundle) {
-            var expression = "(" + bundle + ":(c|le)ss\w*)";
+            var expression = "(" + bundle + ":css\w*)";
             var regex = new RegExp(expression, "ig");
             if (regex.test(file.contents.toString('utf-8'))) {
                 referencedStyleBundles.push(bundle);
