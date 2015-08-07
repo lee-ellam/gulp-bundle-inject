@@ -41,7 +41,7 @@ var bundleInject = function (bundles, options) {
         });
 
         styleBundles.forEach(function (bundle) {
-            var expression = "(" + bundle + ":css\w*)";
+            var expression = "(" + bundle + ":(c|le)ss\w*)";
             var regex = new RegExp(expression, "ig");
             if (regex.test(file.contents.toString('utf-8'))) {
                 referencedStyleBundles.push(bundle);

@@ -20,7 +20,7 @@
   "devDependencies": {
     "async": "^1.4.0",
     "gulp": "^3.9.0",
-    "gulp-inject": "leesus/gulp-inject",
+    "gulp-inject": "^1.5.0",
     "gulp-util": "^3.0.6",
     "less": "^2.5.1",
     "through2": "^2.0.0"
